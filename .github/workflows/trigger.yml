@@ -1,0 +1,18 @@
+name: Trigger Frontend Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dispatch:
+    name: 📝 Dispatch Event to Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch event to frontend repo
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.FRONTEND_REPO_TOKEN }}
+          repository: utilForever/cp-editorial-frontend
+          event-type: cp-editorial-data-updated
